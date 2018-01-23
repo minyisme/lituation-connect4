@@ -24,10 +24,21 @@ namespace Connect4
         private IMoveProvider mp;
 
         /// <summary>
+        /// Constructor that uses the default move provider which reads from the console.
+        /// If label is not specified, the first letter of the player's name is used.
+        /// </summary>
+        /// <param name="name">The player's name</param>
+        public HumanPlayer(string name) : this(name, name[0], new MoveProvider())
+        {
+
+        }
+
+        /// <summary>
         /// Constructor that uses the default move provider which reads from the console
         /// </summary>
-        /// <param name="name"></param>
-        public HumanPlayer(string name) : this(name, new MoveProvider())
+        /// <param name="name">The player's name</param>
+        /// <param name="label">The player's label</param>
+        public HumanPlayer(string name, char label) : this(name, label, new MoveProvider())
         {
 
         }
@@ -35,15 +46,17 @@ namespace Connect4
         /// <summary>
         /// Constructor that uses a specific IMoveProvider, used for unit testing
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="mp"></param>
-        public HumanPlayer(string name, IMoveProvider mp)
+        /// <param name="name">The player's name</param>
+        /// <param name="label">The player's label</param>
+        /// <param name="mp">The move provider</param>
+        public HumanPlayer(string name, char label, IMoveProvider mp)
         {
             // validate the inputs
             // If name is null or empty, throw an ArgumentNullException
             // If mp is null, throw an ArgumentNullException
 
             Name = name;
+            Label = label;
             this.mp = mp;
         }
 
