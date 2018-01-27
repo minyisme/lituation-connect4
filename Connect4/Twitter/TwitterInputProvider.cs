@@ -8,6 +8,9 @@ using Tweetinvi.Models;
 
 namespace Twitter
 {
+    /// <summary>
+    /// The TwitterInputProvider class, represents an input provider that reads from twitter
+    /// </summary>
     public class TwitterInputProvider : IInputProvider
     {
         // used for twitter app connection
@@ -29,7 +32,11 @@ namespace Twitter
             if (user == null)
                 throw new ArgumentException("Twitter user " + twitterUser + " does not exist");
         }
-        
+
+        /// <summary>
+        /// Read the input
+        /// </summary>
+        /// <returns>The input</returns>
         public string Read()
         {
             var tweet = string.Empty;

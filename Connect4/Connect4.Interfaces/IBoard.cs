@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Connect4.Interfaces
 {
+    /// <summary>
+    /// The Board interface, represents a board abstraction
+    /// </summary>
     public interface IBoard
     {
         /// <summary>
