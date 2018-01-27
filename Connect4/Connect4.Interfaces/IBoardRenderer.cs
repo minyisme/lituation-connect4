@@ -9,6 +9,6 @@
         /// Render the specified board
         /// </summary>
         /// <param name="board">The board</param>
-        void Render(Board board);
+        void Render(IBoard board);
     }
 }

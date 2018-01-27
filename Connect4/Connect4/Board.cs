@@ -6,7 +6,7 @@ namespace Connect4
     /// <summary>
     /// The board class, represents the game board
     /// </summary>
-    public class Board
+    public class Board : IBoard
     {
         // need a data structure of pieces to represent pieces on the board
         // (a 2D array or an array of arrays would probably be appropriate)
@@ -46,7 +46,7 @@ namespace Connect4
         /// <param name="column">The column</param>
         /// <param name="row">The row</param>
         /// <returns>The piece, or null if there is none</returns>
-        public Piece GetPiece(int column, int row)
+        public IPiece GetPiece(int column, int row)
         {
             // validate the inputs
             // throw ArgumentOutOfRangeException if either is invalid
@@ -60,7 +60,7 @@ namespace Connect4
         /// </summary>
         /// <param name="piece">The piece to be placed</param>
         /// <param name="column">The column number</param>
-        public void AddPiece(Piece piece, Move move)
+        public void AddPiece(IPiece piece, IMove move)
         {
             // validate the inputs
             // If the piece is null, throw ArgumentNullException

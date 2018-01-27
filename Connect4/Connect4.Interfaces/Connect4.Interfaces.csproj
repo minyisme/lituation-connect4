@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BDA510FE-B4BD-4237-93E7-9C217BA90323}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Connect4</RootNamespace>
-    <AssemblyName>Connect4</AssemblyName>
+    <ProjectGuid>{47838AC2-AD46-4430-8FEF-7DC82BCCFC04}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Connect4.Interfaces</RootNamespace>
+    <AssemblyName>Connect4.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,33 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
-    <Compile Include="ConsoleBoardRenderer.cs" />
-    <Compile Include="ConsoleOutputProvider.cs" />
-    <Compile Include="ConsoleInputProvider.cs" />
-    <Compile Include="Exceptions\InvalidMoveException.cs" />
-    <Compile Include="Exceptions\InvalidInputException.cs" />
-    <Compile Include="GameManager.cs" />
-    <Compile Include="GameState.cs" />
-    <Compile Include="MoveProvider.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="Piece.cs" />
-    <Compile Include="HumanPlayer.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="IBoard.cs" />
+    <Compile Include="IBoardRenderer.cs" />
+    <Compile Include="IInputProvider.cs" />
+    <Compile Include="IMove.cs" />
+    <Compile Include="IMoveProvider.cs" />
+    <Compile Include="IOutputProvider.cs" />
+    <Compile Include="IPiece.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Connect4.Interfaces\Connect4.Interfaces.csproj">
-      <Project>{47838ac2-ad46-4430-8fef-7dc82bccfc04}</Project>
-      <Name>Connect4.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Twitter\Twitter.csproj">
-      <Project>{a538d38d-5ff9-439f-a9c9-d08a01c1015e}</Project>
-      <Name>Twitter</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

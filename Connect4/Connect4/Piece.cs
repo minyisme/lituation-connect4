@@ -6,7 +6,7 @@ namespace Connect4
     /// <summary>
     /// The Piece class, represents a piece on the board
     /// </summary>
-    public class Piece
+    public class Piece : IPiece
     {
         /// <summary>
         /// The owner of the piece

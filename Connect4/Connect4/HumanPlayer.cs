@@ -64,7 +64,7 @@ namespace Connect4
         /// Get a move
         /// </summary>
         /// <returns>The move</returns>
-        public Move GetMove()
+        public IMove GetMove()
         {
             // get the move from the move provider
             throw new NotImplementedException();

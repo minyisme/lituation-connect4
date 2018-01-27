@@ -12,7 +12,7 @@ namespace Connect4
         /// Render the specified board
         /// </summary>
         /// <param name="board">The board</param>
-        public void Render(Board board)
+        public void Render(IBoard board)
         {
             // validate the arguments
             // if board is null, throw ArgumentNullException
