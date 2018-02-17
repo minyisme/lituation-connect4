@@ -48,12 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
@@ -64,6 +59,14 @@
     <Compile Include="Exceptions\InvalidInputException.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="Interfaces\IBoard.cs" />
+    <Compile Include="Interfaces\IBoardRenderer.cs" />
+    <Compile Include="Interfaces\IInputProvider.cs" />
+    <Compile Include="Interfaces\IMove.cs" />
+    <Compile Include="Interfaces\IMoveProvider.cs" />
+    <Compile Include="Interfaces\IOutputProvider.cs" />
+    <Compile Include="Interfaces\IPiece.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="MoveProvider.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="Piece.cs" />
@@ -73,16 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Connect4.Interfaces\Connect4.Interfaces.csproj">
-      <Project>{47838ac2-ad46-4430-8fef-7dc82bccfc04}</Project>
-      <Name>Connect4.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Twitter\Twitter.csproj">
-      <Project>{a538d38d-5ff9-439f-a9c9-d08a01c1015e}</Project>
-      <Name>Twitter</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
