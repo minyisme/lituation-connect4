@@ -12,6 +12,16 @@ namespace Connect4.Interfaces
     public interface IBoard
     {
         /// <summary>
+        /// The number of rows on the board
+        /// </summary>
+        int NumRows { get; }
+
+        /// <summary>
+        /// The number of columns on the board
+        /// </summary>
+        int NumColumns { get; }
+
+        /// <summary>
         /// Get the piece at the specified location
         /// </summary>
         /// <param name="column">The column</param>
@@ -26,20 +36,6 @@ namespace Connect4.Interfaces
         void AddPiece(IPiece piece, IMove move);
 
         /// <summary>
-        /// Is the specified column valid?
-        /// </summary>
-        /// <param name="column">The column number</param>
-        /// <returns>True if yes, false otherwise</returns>
-        bool IsColumnValid(int column);
-
-        /// <summary>
-        /// Is the specified row valid?
-        /// </summary>
-        /// <param name="row">The row number</param>
-        /// <returns>True if yes, false otherwise</returns>
-        bool IsRowValid(int row);
-
-        /// <summary>
         /// Is the specified column full?
         /// </summary>
         /// <param name="column">The column</param>
@@ -51,14 +47,6 @@ namespace Connect4.Interfaces
         /// </summary>
         /// <returns>True if yes, false otherwise</returns>
         bool IsFull();
-
-        /// <summary>
-        /// Check if a specified column and row is part of a 4-in-a-row
-        /// </summary>
-        /// <param name="column">The column number</param>
-        /// <param name="row">The row number</param>
-        /// <returns>True if yes, false otherwise</returns>
-        bool Is4InARow(int column, int row);
 
         /// <summary>
         /// Draw the board

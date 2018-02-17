@@ -11,7 +11,12 @@ namespace Connect4
         /// <summary>
         /// The game board
         /// </summary>
-        private Board board;
+        private IBoard board;
+
+        /// <summary>
+        /// The win checker
+        /// </summary>
+        private IWinChecker winChecker;
 
         /// <summary>
         /// The output provider
@@ -29,7 +34,7 @@ namespace Connect4
         /// <summary>
         /// Default constructor, uses a new Board and ConsoleOutputProvider
         /// </summary>
-        public GameManager() : this(new Board(), new ConsoleOutputProvider())
+        public GameManager() : this(new Board(), new Connect4WinChecker(), new ConsoleOutputProvider())
         {
 
         }
@@ -37,8 +42,8 @@ namespace Connect4
         /// <summary>
         /// Constructor used for unit testing
         /// </summary>
-        /// <param name="board"></param>
-        public GameManager(Board board) : this(board, new ConsoleOutputProvider())
+        /// <param name="board">The board</param>
+        public GameManager(IBoard board) : this(board, new Connect4WinChecker(), new ConsoleOutputProvider())
         {
 
         }
@@ -46,15 +51,28 @@ namespace Connect4
         /// <summary>
         /// Constructor used for unit testing
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="outputProvider"></param>
-        public GameManager(Board board, IOutputProvider outputProvider)
+        /// <param name="board">The board</param>
+        /// <param name="winChecker">The win checker</param>
+        public GameManager(IBoard board, IWinChecker winchecker) : this(board, winchecker, new ConsoleOutputProvider())
+        {
+
+        }
+
+        /// <summary>
+        /// Constructor used for unit testing
+        /// </summary>
+        /// <param name="board">The board</param>
+        /// <param name="winChecker">The win checker</param>
+        /// <param name="outputProvider">The output provider</param>
+        public GameManager(IBoard board, IWinChecker winChecker, IOutputProvider outputProvider)
         {
             // validate the inputs
             // if board is null, throw an ArgumentNullException
+            // if winChecker is null, throw an ArgumentNullException
             // if outputProvider is null, throw an ArgumentNullException
 
             this.board = board;
+            this.winChecker = winChecker;
             this.outputProvider = outputProvider;
             GameState = GameState.WaitingToStart;
         }
@@ -72,7 +90,7 @@ namespace Connect4
 
             // create the game loop
             // set game state to Started
-            // try to call PerformSingleTurn(currentPlayer, board, moveManager, outputProvider)
+            // try to call PerformSingleTurn(currentPlayer)
             // if an InvalidInputException is thrown, catch it, print an error, and keep looping
             // if an InvalidMoveException is thrown, catch it, print an error, and keep looping
 
@@ -105,8 +123,8 @@ namespace Connect4
             // make a move using the board, passing in that piece
 
             // set game state to CheckingForGameOver
-            // Did the current player win? (ask the board) 
-            // If yes, change the game state to GameState.Winner
+            // Did the current player win? (ask the win checker)
+            // If yes, change the game state to GameState.Winner and return
 
             // Is the board full? (ask the board)
             // If yes, change the game state to GameState.Draw

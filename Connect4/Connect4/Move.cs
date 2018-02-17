@@ -21,10 +21,19 @@ namespace Connect4
         /// Move constructor, with a column specified
         /// </summary>
         /// <param name="column"></param>
-        public Move(int column)
+        public Move(int column) : this(column, -1)
+        {
+        }
+
+        /// <summary>
+        /// Move constructor, with both a column and row specified (for unit testing)
+        /// </summary>
+        /// <param name="column">The column</param>
+        /// <param name="row">The row</param>
+        public Move(int column, int row)
         {
             Column = column;
-            Row = -1;
+            Row = row;
         }
     }
 }

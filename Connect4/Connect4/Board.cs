@@ -1,5 +1,6 @@
 ﻿using Connect4.Interfaces;
 using System;
+using System.Configuration;
 
 namespace Connect4
 {
@@ -8,12 +9,11 @@ namespace Connect4
     /// </summary>
     public class Board : IBoard
     {
-        // need a data structure of pieces to represent pieces on the board
+        // need a data structure of IPieces to represent pieces on the board
         // (a 2D array or an array of arrays would probably be appropriate)
         // empty spots will just contain null
 
-        // keep track of how many valid moves have been made (as well as the total spots on the board)
-        // so we can tell if the board is full
+        // keep track of how many valid moves have been made so we can tell if the board is full
 
         /// <summary>
         /// The board renderer, used to draw the board
@@ -21,23 +21,39 @@ namespace Connect4
         private IBoardRenderer renderer;
 
         /// <summary>
-        /// Default constructor, uses the ConsoleBoardRenderer
+        /// The number of rows on the board
         /// </summary>
-        public Board() : this(new ConsoleBoardRenderer())
-        {
+        public int NumRows { get; protected set; }
 
+        /// <summary>
+        /// The number of columns on the board
+        /// </summary>
+        public int NumColumns { get; protected set; }
+
+        /// <summary>
+        /// Default constructor, uses the ConsoleBoardRenderer
+        /// Also gets the board size from the app.config
+        /// </summary>
+        public Board() : this(
+            new ConsoleBoardRenderer(), 
+            int.Parse(ConfigurationManager.AppSettings["BoardRows"]), 
+            int.Parse(ConfigurationManager.AppSettings["BoardColumns"]))
+        {
         }
 
         /// <summary>
         /// Constructor with a specified IBoardRenderer, used for unit testing
         /// </summary>
         /// <param name="renderer">The renderer</param>
-        public Board(IBoardRenderer renderer)
+        public Board(IBoardRenderer renderer, int rows, int columns)
         {
             // validate the inputs
             // If renderer is null, throw an ArgumentNullException
+            // If rows or columns <=0, throw an ArgumentOutOfRangeException
 
             this.renderer = renderer;
+            NumRows = rows;
+            NumColumns = columns;
         }
 
         /// <summary>
@@ -66,8 +82,8 @@ namespace Connect4
             // If the piece is null, throw ArgumentNullException
             // If the move is null, throw ArgumentNullException
 
-            // if the IsColumnValid returns false, throw InvalidMoveException with an appropriate message
-            // if the IsColumnFull returns true, throw InvalidMoveException with an appropriate message
+            // if the column is invalid, throw InvalidMoveException with an appropriate message
+            // if the if the column is full, throw InvalidMoveException with an appropriate message
 
             // find out what row the piece would end up on by getting the "lowest" free space on the board for this column
             // add the piece to the board in the correct spot
@@ -115,25 +131,6 @@ namespace Connect4
         /// <returns>True if yes, false otherwise</returns>
         public bool IsFull()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Check if a specified column and row is part of a 4-in-a-row
-        /// </summary>
-        /// <param name="column">The column number</param>
-        /// <param name="row">The row number</param>
-        /// <returns>True if yes, false otherwise</returns>
-        public bool Is4InARow(int column, int row)
-        {
-            // validate the inputs
-            // if IsColumnValid returns false, throw ArgumentOutOfRangeException
-            // if IsRowValid returns false, throw ArgumentOutOfRangeException
-
-            // check if the board contains 4 pieces in a row (with the SAME OWNER) that contains the given move
-
-            // Don't forget the move can be any part of the 4-in-a-row, and the 4-in-a-row
-            // can be in any direction (horizontal, vertical, both diagonals)
             throw new NotImplementedException();
         }
 
