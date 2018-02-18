@@ -5,7 +5,7 @@ namespace Connect4
     /// <summary>
     /// The Move class, represents a game move
     /// </summary>
-    public class Move
+    public class Move : IMove
     {
         /// <summary>
         /// The column where the piece should be dropped
