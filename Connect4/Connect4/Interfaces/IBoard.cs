@@ -51,6 +51,6 @@ namespace Connect4.Interfaces
         /// <summary>
         /// Draw the board
         /// </summary>
-        void Draw();
+        void Draw(IBoardRenderer renderer);
     }
 }

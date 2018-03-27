@@ -9,16 +9,15 @@ namespace Connect4
     /// </summary>
     public class Board : IBoard
     {
-        // need a data structure of IPieces to represent pieces on the board
-        // (a 2D array or an array of arrays would probably be appropriate)
-        // empty spots will just contain null
+        // the rows and columns, hardcoded for now
+        private const int rows = 6;
+        private const int columns = 7;
 
-        // keep track of how many valid moves have been made so we can tell if the board is full
+        // the board, represented by a 2d array of pieces
+        private IPiece[,] pieces;
 
-        /// <summary>
-        /// The board renderer, used to draw the board
-        /// </summary>
-        private IBoardRenderer renderer;
+        // the number of pieces on the board
+        private int numPieces;
 
         /// <summary>
         /// The number of rows on the board
@@ -31,29 +30,40 @@ namespace Connect4
         public int NumColumns { get; protected set; }
 
         /// <summary>
-        /// Default constructor, uses the ConsoleBoardRenderer
-        /// Also gets the board size from the app.config
+        /// Default constructor, uses hardcoded rows and columns
         /// </summary>
-        public Board() : this(
-            new ConsoleBoardRenderer(), 
-            int.Parse(ConfigurationManager.AppSettings["BoardRows"]), 
-            int.Parse(ConfigurationManager.AppSettings["BoardColumns"]))
+        public Board() : this(rows, columns)
         {
+
         }
 
         /// <summary>
-        /// Constructor with a specified IBoardRenderer, used for unit testing
+        /// Constructor
         /// </summary>
-        /// <param name="renderer">The renderer</param>
-        public Board(IBoardRenderer renderer, int rows, int columns)
+        /// <param name="numRows">The number of rows</param>
+        /// <param name="numRows">The number columns</param>
+        public Board(int numRows, int numColumns)
         {
             // validate the inputs
-            // If renderer is null, throw an ArgumentNullException
-            // If rows or columns <=0, throw an ArgumentOutOfRangeException
 
-            this.renderer = renderer;
-            NumRows = rows;
-            NumColumns = columns;
+            NumRows = numRows;
+            NumColumns = numColumns;
+            pieces = new IPiece[NumRows, NumColumns];
+        }
+
+        /// <summary>
+        /// Constuctor used for unit testing
+        /// </summary>
+        /// <param name="pieces">The pieces</param>
+        public Board(IPiece[,] pieces)
+        {
+            // validate the inputs
+
+            this.pieces = pieces;
+
+            // calculate the number of rows and columns and update num rows and num columns
+
+            // calculate the number of non-null pieces and update numpieces
         }
 
         /// <summary>
@@ -135,9 +145,10 @@ namespace Connect4
         }
 
         /// <summary>
-        /// Draw the board using the board renderer
+        /// Draw the board using a specified renderer
         /// </summary>
-        public void Draw()
+        /// <param name="renderer">The board renderer</param>
+        public void Draw(IBoardRenderer renderer)
         {
             renderer.Render(this);
         }

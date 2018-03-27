@@ -1,5 +1,6 @@
 ﻿using Connect4.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace Connect4
 {
@@ -14,17 +15,35 @@ namespace Connect4
         private IBoard board;
 
         /// <summary>
+        /// The board renderer
+        /// </summary>
+        private IBoardRenderer renderer;
+
+        /// <summary>
         /// The win checker
         /// </summary>
         private IWinChecker winChecker;
+
+        /// <summary>
+        /// The input provider
+        /// </summary>
+        private IInputProvider inputProvider;
 
         /// <summary>
         /// The output provider
         /// </summary>
         private IOutputProvider outputProvider;
 
-        // create something to keep track of the current player
-        // remember to use interfaces whenever possible
+        /// <summary>
+        /// The players. This is a list so we can support any number of players in the future.
+        /// This uses IPlayer so we can support any type of player in the future (human player, computer player, etc...)
+        /// </summary>
+        private List<IPlayer> players;
+
+        /// <summary>
+        /// The current player
+        /// </summary>
+        private IPlayer currentPlayer;
 
         /// <summary>
         /// The game state
@@ -34,7 +53,12 @@ namespace Connect4
         /// <summary>
         /// Default constructor, uses a new Board and ConsoleOutputProvider
         /// </summary>
-        public GameManager() : this(new Board(), new Connect4WinChecker(), new ConsoleOutputProvider())
+        public GameManager() : this(
+            new Board(), 
+            new ConsoleBoardRenderer(),
+            new Connect4WinChecker(),
+            new ConsoleInputProvider(),
+            new ConsoleOutputProvider())
         {
 
         }
@@ -43,38 +67,23 @@ namespace Connect4
         /// Constructor used for unit testing
         /// </summary>
         /// <param name="board">The board</param>
-        public GameManager(IBoard board) : this(board, new Connect4WinChecker(), new ConsoleOutputProvider())
-        {
-
-        }
-
-        /// <summary>
-        /// Constructor used for unit testing
-        /// </summary>
-        /// <param name="board">The board</param>
+        /// <param name="renderer">The board renderer</param>
         /// <param name="winChecker">The win checker</param>
-        public GameManager(IBoard board, IWinChecker winchecker) : this(board, winchecker, new ConsoleOutputProvider())
-        {
-
-        }
-
-        /// <summary>
-        /// Constructor used for unit testing
-        /// </summary>
-        /// <param name="board">The board</param>
-        /// <param name="winChecker">The win checker</param>
+        /// <param name="inputprovider">The input provider</param>
         /// <param name="outputProvider">The output provider</param>
-        public GameManager(IBoard board, IWinChecker winChecker, IOutputProvider outputProvider)
+        public GameManager(IBoard board, IBoardRenderer renderer, IWinChecker winChecker, IInputProvider inputProvider, IOutputProvider outputProvider)
         {
             // validate the inputs
-            // if board is null, throw an ArgumentNullException
-            // if winChecker is null, throw an ArgumentNullException
-            // if outputProvider is null, throw an ArgumentNullException
 
             this.board = board;
+            this.renderer = renderer;
             this.winChecker = winChecker;
+            this.inputProvider = inputProvider;
             this.outputProvider = outputProvider;
-            GameState = GameState.WaitingToStart;
+
+            // initialize the players list
+
+            // set the game state to waiting to start
         }
 
         /// <summary>
