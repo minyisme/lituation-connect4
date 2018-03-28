@@ -39,7 +39,7 @@ namespace Connect4.Tests
         }
 
         [TestMethod]
-        public void TestIsFullReturnsTrue()
+        public void TestIsFull()
         {
             // make sure IsFull works in both cases
         }

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Connect4.Tests
 {
     [TestClass]
-    public class Connect4WinChecker
+    public class Connect4WinCheckerTests
     {
         [TestMethod]
         public void TestIsWinHorizontal()
@@ -33,19 +33,23 @@ namespace Connect4.Tests
         }
 
         [TestMethod]
-        public void TestIsWinDiagonal()
+        public void TestIsWinDiagonal1()
         {
             // make sure IsWin works when there is a diagonal 4 in a row
             // for a board and move you specify
 
-            // you should test all 8 cases here, since the move can be any part of the
-            // 4-in-a-row, and there are two diagonal directions
+            // you should test all 4 cases here, since the move can be any part of the
+            // 4-in-a-row
 
             // for example, create a board, put pieces in until it contains a diagonal 4 in a row
             // then test IsWin for each column/row in the 4-in-a-row and make sure
             // it returns true for all 4 spots
+        }
 
-            // Then repeat this for the other diagonal
+        [TestMethod]
+        public void TestIsWinDiagonal2()
+        {
+            // repeat the above test for the other diagonal direction
         }
 
         [TestMethod]

@@ -59,13 +59,8 @@ namespace Connect4.Tests
         [TestMethod]
         public void TestPerformSingleTurnWinner()
         {
-            // create a board that's one move away from a win
-            // create a game manager, passing in the board
-
-            // create a MockPlayer that will return the winning move when GetMove() is called
-
+            // create a mock win checker that will return true when checking for a win
             // call gameManager.PerformSingleTurn(), passing in the MockPlayer
-            // This should perform the winning move
 
             // Verify that the game state is Winner
         }
@@ -73,13 +68,8 @@ namespace Connect4.Tests
         [TestMethod]
         public void TestPerformSingleTurnDraw()
         {
-            // create a board that's one move away from a draw
-            // create a game manager, passing in the board
-
-            // create a MockPlayer that will return the draw move when GetMove() is called
-
+            // create a mock board that will return true when checking for a full board
             // call gameManager.PerformSingleTurn(), passing in the MockPlayer
-            // This should perform the last move and fill up the board
 
             // Verify that the game state is Draw
         }
