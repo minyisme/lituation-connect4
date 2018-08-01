@@ -29,8 +29,8 @@ namespace Connect4.Tests
         public void TestRender()
         {
             // create a board
-            // create a player
-            // create some pieces with the player as the owner
+            // create a mock player
+            // create some mock pieces with the player as the owner
             // add the pieces to the board
             
             // redirect the Console output (see notes at the top of the class)
