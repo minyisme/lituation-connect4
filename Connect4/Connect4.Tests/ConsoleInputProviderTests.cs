@@ -5,39 +5,27 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Connect4.Tests
 {
     [TestClass]
-    public class ConsoleBoardRendererTests
+    public class ConsoleInputProviderTests
     {
         /*
-         * The ConsoleBoardRenderer writes to the console, which is not easily tested.
-         * To fix this, redirect the Console output to a StringWriter.
-         * Then you can verify the contents using ToString(). This is shown below.
-         * This won't check colors, but it will check contents, which is good enough :)
+         * The ConsoleInputProvider reads from the console, which is not easily tested.
+         * To fix this, redirect the Console input to a StringReader, and pass in the string you want to read
          * 
          * // arrange
-         * var str = "Hello World"; // this should be your expected board string when rendered
-         * var sw = new StringWriter();
+         * var expected = "Hello World"; // this is your redirected input
+         * var sr = new StringReader(expected);
          * 
          * // act
-         * Console.SetOut(sw); // this redirects the output of all Console.Writes to the StringWriter
-         * Console.WriteLine(str); // this is where you would call BoardRenderer.Render(board);
+         * Console.SetIn(sr); // this redirects the input of all Console.Reads to the StringReader
+         * var actual = Console.ReadLine(); // this is where you would call ConsoleInputProvider.Read()
          * 
          * // assert
-         * Assert.AreEqual(str, sw.ToString()); // this verifies the board rendered correctly
+         * Assert.AreEqual(expected, actual); // this verifies you can read from the console correctly
          */
 
         [TestMethod]
-        public void TestRender()
+        public void TestRead()
         {
-            // create a board
-            // create a player
-            // create some pieces with the player as the owner
-            // add the pieces to the board
-            
-            // redirect the Console output (see notes at the top of the class)
-
-            // render the board
-
-            // Verify that the board output is what you expect
         }
     }
 }
