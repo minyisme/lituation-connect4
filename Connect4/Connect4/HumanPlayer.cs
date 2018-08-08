@@ -54,7 +54,14 @@ namespace Connect4
             // validate the inputs
             // If name is null or empty, throw an ArgumentNullException
             // If mp is null, throw an ArgumentNullException
-
+            if (name == null || name == ' ')
+            {
+                throw new ArgumentNullException();
+            }
+            if (mp == null)
+            {
+                throw new ArgumentNullException();
+            }
             Name = name;
             Label = label;
             this.mp = mp;
@@ -66,8 +73,8 @@ namespace Connect4
         /// <returns>The move</returns>
         public IMove GetMove()
         {
+            return this.mp.GetMove();
             // get the move from the move provider
-            throw new NotImplementedException();
         }
     }
 }

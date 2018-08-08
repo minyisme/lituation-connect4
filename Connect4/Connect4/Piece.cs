@@ -21,7 +21,10 @@ namespace Connect4
         {
             // validate the inputs
             // If owner is null, throw an ArgumentNullException
-
+            if (owner == null)
+            {
+                throw new ArgumentNullException();
+            }
             Owner = owner;
         }
 
@@ -32,7 +35,7 @@ namespace Connect4
         /// <returns></returns>
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return this.Owner.Label;
         }
     }
 }
