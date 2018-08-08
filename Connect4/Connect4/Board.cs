@@ -111,15 +111,15 @@ namespace Connect4
             // find out what row the piece would end up on by getting the "lowest" free space on the board for this column
             // add the piece to the board in the correct spot
             // finally, update the row in the move passed in so the caller will know where the piece ended up
-            for (int i = 5; i >= -1; i--)
+            if (this.IsColumnFull(move.Column))
             {
-                if (i == -1)
-                {
-                    throw new InvalidMoveException();
-                }
+                throw new InvalidMoveException();
+            }
+            for (int i = 5; i >= 0; i--)
+            {
                 if (pieces[move.Column, i] == null)
                 {
-                    pieces[columns, i] = piece;
+                    pieces[move.Column, i] = piece;
                     move.Row = i;
                     break;
                 }
