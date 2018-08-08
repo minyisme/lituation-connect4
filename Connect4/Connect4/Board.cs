@@ -91,14 +91,15 @@ namespace Connect4
             // validate the inputs
             // If the piece is null, throw ArgumentNullException
             // If the move is null, throw ArgumentNullException
-            if (piece == null)
-            {
-                throw new ArgumentNullException();
-            }
-            if (move == null)
-            {
-                throw new ArgumentNullException();
-            }
+            // NOT USING THIS MAKE THIS NOT BE ERRORS!!!
+//             if (piece == null)
+//             {
+//                 throw new ArgumentNullException();
+//             }
+//             if (move == null)
+//             {
+//                 throw new ArgumentNullException();
+//             }
             // if the column is invalid, throw InvalidMoveException with an appropriate message
             // if the if the column is full, throw InvalidMoveException with an appropriate message
             // NOT NEEDED WHEN UI IS IMPLEMENTED
