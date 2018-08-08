@@ -37,11 +37,11 @@ namespace Connect4
         /// Get a move
         /// </summary>
         /// <returns>The move</returns>
-        public IMove GetMove()
+        public IMove GetMove(int column)
         {
             // This function should get input from the input provider
             // and create a move from it, returning that move
-
+            return new Move(column);
             // if the input is invalid (can't be parsed into an int, for example), 
             // you should throw an InvalidInputException
             throw new NotImplementedException();
