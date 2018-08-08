@@ -50,6 +50,8 @@ namespace Connect4
         /// </summary>
         public GameState GameState { get; private set; }
 
+        private IMoveProvider moveProvider;
+
         /// <summary>
         /// Default constructor, uses a new Board and ConsoleOutputProvider
         /// </summary>
@@ -58,7 +60,8 @@ namespace Connect4
             new ConsoleBoardRenderer(),
             new Connect4WinChecker(),
             new ConsoleInputProvider(),
-            new ConsoleOutputProvider())
+            new ConsoleOutputProvider(),
+            new MoveProvider())
         {
 
         }
@@ -71,7 +74,7 @@ namespace Connect4
         /// <param name="winChecker">The win checker</param>
         /// <param name="inputprovider">The input provider</param>
         /// <param name="outputProvider">The output provider</param>
-        public GameManager(IBoard board, IBoardRenderer renderer, IWinChecker winChecker, IInputProvider inputProvider, IOutputProvider outputProvider)
+        public GameManager(IBoard board, IBoardRenderer renderer, IWinChecker winChecker, IInputProvider inputProvider, IOutputProvider outputProvider, IMoveProvider moveProvider)
         {
             // validate the inputs
 
@@ -80,6 +83,7 @@ namespace Connect4
             this.winChecker = winChecker;
             this.inputProvider = inputProvider;
             this.outputProvider = outputProvider;
+            this.moveProvider = moveProvider;
 
             // initialize the players list
 
@@ -133,7 +137,7 @@ namespace Connect4
             GameState = GameState.WaitingForUserInput;
             // get the move from the player
             var column = Convert.ToInt32(Console.ReadLine());
-            var move = GetMove(column);
+            var move = moveProvider.GetMove(column);
             // set game state to PerformingMove
             GameState = GameState.PerformingMove;
             // create a piece with the player as the owner
