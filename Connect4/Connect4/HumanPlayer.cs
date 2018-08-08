@@ -73,8 +73,8 @@ namespace Connect4
         /// <returns>The move</returns>
         public IMove GetMove()
         {
+            return this.mp.GetMove();
             // get the move from the move provider
-            throw new NotImplementedException();
         }
     }
 }
