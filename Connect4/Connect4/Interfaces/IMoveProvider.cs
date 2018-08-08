@@ -9,6 +9,6 @@
         /// Get a move
         /// </summary>
         /// <returns>The move</returns>
-        IMove GetMove();
+        IMove GetMove(int column);
     }
 }

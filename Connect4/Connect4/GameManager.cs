@@ -50,6 +50,8 @@ namespace Connect4
         /// </summary>
         public GameState GameState { get; private set; }
 
+        private IMoveProvider moveProvider;
+
         /// <summary>
         /// Default constructor, uses a new Board and ConsoleOutputProvider
         /// </summary>
@@ -58,7 +60,8 @@ namespace Connect4
             new ConsoleBoardRenderer(),
             new Connect4WinChecker(),
             new ConsoleInputProvider(),
-            new ConsoleOutputProvider())
+            new ConsoleOutputProvider(),
+            new MoveProvider())
         {
 
         }
@@ -71,7 +74,7 @@ namespace Connect4
         /// <param name="winChecker">The win checker</param>
         /// <param name="inputprovider">The input provider</param>
         /// <param name="outputProvider">The output provider</param>
-        public GameManager(IBoard board, IBoardRenderer renderer, IWinChecker winChecker, IInputProvider inputProvider, IOutputProvider outputProvider)
+        public GameManager(IBoard board, IBoardRenderer renderer, IWinChecker winChecker, IInputProvider inputProvider, IOutputProvider outputProvider, IMoveProvider moveProvider)
         {
             // validate the inputs
 
@@ -80,6 +83,7 @@ namespace Connect4
             this.winChecker = winChecker;
             this.inputProvider = inputProvider;
             this.outputProvider = outputProvider;
+            this.moveProvider = moveProvider;
 
             // initialize the players list
 
@@ -120,23 +124,42 @@ namespace Connect4
         {
             // validate the arguments
             // if player is null, throw an ArgumentNullException
-
+            if (player == null)
+            {
+                throw new ArgumentNullException();
+            }
             // tell the player it's their turn using their name, and ask them for their move 
             // using the output provider to print
 
+            // TODO: CHANGE WHEN UI IS IMPLEMENTED
+            Console.WriteLine($"{player.Name}, it's your turn. Where would you like to move?");
             // set game state to WaitingForUserInput
+            GameState = GameState.WaitingForUserInput;
             // get the move from the player
-
+            var column = Convert.ToInt32(Console.ReadLine());
+            var move = moveProvider.GetMove(column);
             // set game state to PerformingMove
+            GameState = GameState.PerformingMove;
             // create a piece with the player as the owner
+            // TO DO BY VILDE
             // make a move using the board, passing in that piece
+            board.AddPiece(piece, move);
 
             // set game state to CheckingForGameOver
+            GameState = GameState.CheckingForGameOver;
             // Did the current player win? (ask the win checker)
+            
             // If yes, change the game state to GameState.Winner and return
-
+            if (winChecker.IsWin(board, move))
+            {
+                GameState = GameState.Winner;
+            }
             // Is the board full? (ask the board)
             // If yes, change the game state to GameState.Draw
+            if (board.IsFull())
+            {
+                GameState = GameState.Draw;
+            }
         }
 
         /// <summary>

@@ -91,15 +91,41 @@ namespace Connect4
             // validate the inputs
             // If the piece is null, throw ArgumentNullException
             // If the move is null, throw ArgumentNullException
-
+            // NOT USING THIS MAKE THIS NOT BE ERRORS!!!
+//             if (piece == null)
+//             {
+//                 throw new ArgumentNullException();
+//             }
+//             if (move == null)
+//             {
+//                 throw new ArgumentNullException();
+//             }
             // if the column is invalid, throw InvalidMoveException with an appropriate message
             // if the if the column is full, throw InvalidMoveException with an appropriate message
+            // NOT NEEDED WHEN UI IS IMPLEMENTED
+            //if (move.Column < 0 || move.Column > 6)
+            //{
+            //    throw new InvalidMoveException();
+            //}
 
             // find out what row the piece would end up on by getting the "lowest" free space on the board for this column
             // add the piece to the board in the correct spot
-
             // finally, update the row in the move passed in so the caller will know where the piece ended up
-            throw new NotImplementedException();
+            if (this.IsColumnFull(move.Column))
+            {
+                throw new InvalidMoveException();
+            }
+            for (int i = 5; i >= 0; i--)
+            {
+                if (pieces[move.Column, i] == null)
+                {
+                    pieces[move.Column, i] = piece;
+                    move.Row = i;
+                    break;
+                }
+            }
+
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -131,6 +157,11 @@ namespace Connect4
         /// <returns>True if the column is full, false otherwise</returns>
         public bool IsColumnFull(int column)
         {
+            if (pieces[column, 0] != null)
+            {
+                return true;
+            }
+            return false;
             // throw ArgumentOutOfRange if IsColumnValid() is false
             throw new NotImplementedException();
         }
@@ -141,6 +172,14 @@ namespace Connect4
         /// <returns>True if yes, false otherwise</returns>
         public bool IsFull()
         {
+            for (int i = 0; i < columns; i++)
+            {
+                if (!IsColumnFull(i))
+                {
+                    return false;
+                }
+            }
+            return true;
             throw new NotImplementedException();
         }
 
